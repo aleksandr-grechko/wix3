@@ -122,6 +122,7 @@ enum WIXSTDBA_CONTROL
     // Modify page
     WIXSTDBA_CONTROL_REPAIR_BUTTON,
     WIXSTDBA_CONTROL_UNINSTALL_BUTTON,
+    WIXSTDBA_CONTROL_CHANGE_BUTTON,
     WIXSTDBA_CONTROL_MODIFY_CANCEL_BUTTON,
 
     // Progress page
@@ -192,6 +193,7 @@ static THEME_ASSIGN_CONTROL_ID vrgInitControls[] = {
 
     { WIXSTDBA_CONTROL_REPAIR_BUTTON, L"RepairButton" },
     { WIXSTDBA_CONTROL_UNINSTALL_BUTTON, L"UninstallButton" },
+    { WIXSTDBA_CONTROL_CHANGE_BUTTON, L"ChangeButton" },
     { WIXSTDBA_CONTROL_MODIFY_CANCEL_BUTTON, L"ModifyCancelButton" },
 
     { WIXSTDBA_CONTROL_CACHE_PROGRESS_PACKAGE_TEXT, L"CacheProgressPackageText" },
@@ -1908,6 +1910,10 @@ private: // privates
                 pBA->OnClickUninstallButton();
                 return 0;
 
+            case WIXSTDBA_CONTROL_CHANGE_BUTTON:
+                pBA->OnClickChangeButton();
+                return 0;
+
             case WIXSTDBA_CONTROL_LAUNCH_BUTTON:
                 pBA->OnClickLaunchButton();
                 return 0;
@@ -2750,6 +2756,16 @@ private: // privates
         SavePageSettings(WIXSTDBA_PAGE_INSTALL);
 
         this->OnPlan(BOOTSTRAPPER_ACTION_INSTALL);
+    }
+
+    //
+    // OnClickChangeButton - start the change.
+    //
+    void OnClickChangeButton()
+    {
+        SavePageSettings(WIXSTDBA_PAGE_MODIFY);
+
+        this->OnPlan(BOOTSTRAPPER_ACTION_MODIFY);
     }
 
 

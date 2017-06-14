@@ -751,6 +751,10 @@ extern "C" HRESULT MsiEnginePlanCalculatePackage(
             {
                 execute = BOOTSTRAPPER_ACTION_STATE_REPAIR;
             }
+            else if (qwVersion == qwInstalledVersion && pPackage->Msi.fDisplayInternalUI)
+            {
+                execute = BOOTSTRAPPER_ACTION_STATE_MODIFY;
+            }
             else
             {
                 execute = fFeatureActionDelta ? BOOTSTRAPPER_ACTION_STATE_MODIFY : BOOTSTRAPPER_ACTION_STATE_NONE;
